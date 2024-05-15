@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dswdtpqk4njky"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_xly4c"]
+[ext_resource type="PackedScene" uid="uid://kkuvpabqbue7" path="res://Scenes/apple.tscn" id="2_ocb51"]
+
+[node name="Level" type="Node"]
+script = ExtResource("1_xly4c")
+
+[node name="moveTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="deathTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Apple" parent="." instance=ExtResource("2_ocb51")]
+position = Vector2(960, 384)
+
+[connection signal="timeout" from="moveTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="eaten" from="Apple" to="." method="_on_apple_eaten"]
