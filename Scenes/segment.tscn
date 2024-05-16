@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd4exx1iyxgl6"]
+[gd_scene load_steps=4 format=3 uid="uid://bd4exx1iyxgl6"]
 
 [ext_resource type="Script" path="res://Scripts/segment.gd" id="1_75sgo"]
+[ext_resource type="Texture2D" uid="uid://ba5vx8vsijypk" path="res://Assets/segment.png" id="2_ntqho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7sww"]
 size = Vector2(64, 64)
@@ -8,10 +9,10 @@ size = Vector2(64, 64)
 [node name="Segment" type="CharacterBody2D"]
 script = ExtResource("1_75sgo")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Texture" type="TextureRect" parent="."]
 offset_right = 64.0
 offset_bottom = 64.0
-color = Color(0, 0.768627, 0, 1)
+texture = ExtResource("2_ntqho")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)

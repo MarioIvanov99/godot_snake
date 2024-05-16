@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://x0y1k0jkl1y4"]
+
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_y8a5v"]
+[ext_resource type="Texture2D" uid="uid://clm0v14w6354d" path="res://Assets/background.jpg" id="2_4l7bq"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_y8a5v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.576471)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4l7bq")
+stretch_mode = 1
+
+[node name="Lose Label" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -216.0
+offset_right = 272.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "YOU LOSE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Retry" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 24.0
+offset_right = 104.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Retry"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 30
+text = "Try Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = 80.0
+offset_right = 104.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Menu"]
+texture_filter = 1
+offset_right = 208.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

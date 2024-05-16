@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://kkuvpabqbue7"]
+[gd_scene load_steps=5 format=3 uid="uid://kkuvpabqbue7"]
 
 [ext_resource type="Script" path="res://Scripts/apple.gd" id="1_qtx2j"]
+[ext_resource type="Texture2D" uid="uid://imbyn552rg0x" path="res://Assets/apple.png" id="2_svi3c"]
+[ext_resource type="AudioStream" uid="uid://bjr6m3dc4dcnu" path="res://Assets/Sounds/eat.wav" id="3_b074a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aujyp"]
 size = Vector2(48, 48)
@@ -13,9 +15,13 @@ script = ExtResource("1_qtx2j")
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_aujyp")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Texture" type="TextureRect" parent="."]
 offset_right = 64.0
 offset_bottom = 64.0
-color = Color(0.807843, 0, 0, 1)
+texture = ExtResource("2_svi3c")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_b074a")
+volume_db = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

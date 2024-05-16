@@ -1,13 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://dswdtpqk4njky"]
+[gd_scene load_steps=9 format=3 uid="uid://dswdtpqk4njky"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_xly4c"]
+[ext_resource type="Script" path="res://Scripts/Tracker.gd" id="2_iuvev"]
 [ext_resource type="PackedScene" uid="uid://kkuvpabqbue7" path="res://Scenes/apple.tscn" id="2_ocb51"]
+[ext_resource type="Texture2D" uid="uid://clm0v14w6354d" path="res://Assets/background.jpg" id="3_pcssq"]
+[ext_resource type="AudioStream" uid="uid://c3bef3v556s3i" path="res://Assets/Sounds/destruction.wav" id="5_vwk52"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_waif4"]
+size = Vector2(98, 592)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm7ct"]
+size = Vector2(98, 592)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8bhf"]
+size = Vector2(1152, 88)
 
 [node name="Level" type="Node"]
 script = ExtResource("1_xly4c")
 
+[node name="Tracker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_iuvev")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.576471)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pcssq")
+stretch_mode = 1
+
 [node name="moveTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.15
 autostart = true
 
 [node name="deathTimer" type="Timer" parent="."]
@@ -16,6 +42,138 @@ wait_time = 0.1
 [node name="Apple" parent="." instance=ExtResource("2_ocb51")]
 position = Vector2(960, 384)
 
+[node name="Borders" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Left"]
+position = Vector2(-56, 288)
+shape = SubResource("RectangleShape2D_waif4")
+
+[node name="Right" type="Area2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Right"]
+position = Vector2(1208, 288)
+shape = SubResource("RectangleShape2D_qm7ct")
+
+[node name="Top" type="Area2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Top"]
+position = Vector2(576, -56)
+shape = SubResource("RectangleShape2D_p8bhf")
+
+[node name="Bottom" type="Area2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Bottom"]
+position = Vector2(576, 624)
+shape = SubResource("RectangleShape2D_p8bhf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0.278431)
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 208.0
+offset_bottom = 88.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 176.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DestroyAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vwk52")
+
+[node name="VictoryMessage" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="VictoryMessage"]
+offset_right = 1152.0
+offset_bottom = 576.0
+
+[node name="Label" type="Label" parent="VictoryMessage/Panel"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -168.0
+offset_right = 280.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VictoryMessage"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VictoryMessage/Button"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Play Again"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="VictoryMessage"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 144.0
+offset_right = 88.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VictoryMessage/Button2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="moveTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="eaten" from="Apple" to="." method="_on_apple_eaten"]
+[connection signal="body_entered" from="Borders/Left" to="." method="_on_border_body_entered"]
+[connection signal="body_entered" from="Borders/Right" to="." method="_on_border_body_entered"]
+[connection signal="body_entered" from="Borders/Top" to="." method="_on_border_body_entered"]
+[connection signal="body_entered" from="Borders/Bottom" to="." method="_on_border_body_entered"]
+[connection signal="pressed" from="VictoryMessage/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VictoryMessage/Button2" to="." method="_on_button_2_pressed"]
